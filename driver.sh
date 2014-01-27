@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+
 # Run me from root level of project.
 # Will use system ISOs in ./packer_cache if available.
 
@@ -16,6 +17,5 @@ VBoxManage unregistervm packer-virtualbox-iso --delete 2> /dev/null || true
 packer build -force ubuntu_64/ubuntu_64.json
 
 
-# ./output/ovf -> ~/VirtualBox VMs/packer-virtualbox/
 # Need 1024MB for CCW REPL.
 VBoxManage import output-virtualbox-iso/packer-virtualbox-iso.ovf -vsys 0 --memory 1024
