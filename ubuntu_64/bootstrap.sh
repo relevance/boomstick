@@ -36,3 +36,7 @@ ln -s $(pwd)/Counterclockwise ~/Desktop/
 cd ~
 
 
+
+
+log "Removing default net rules."
+rm /etc/udev/rules.d/70-persistent-net.rules
