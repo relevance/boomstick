@@ -20,7 +20,7 @@ with no further config, etc.
 
 ### Usage
 
-Run `./driver.sh` and stand back. 
+Run `./driver.sh` and STAND BACK.
 
 Prepend `PACKER_LOG=1` to see Packer debug messages.
 
