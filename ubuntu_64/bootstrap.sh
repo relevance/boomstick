@@ -14,6 +14,8 @@ log() {
 
 
 sudo apt-get update
+sudo apt-get dist-upgrade
+
 sudo apt-get -y install git
 sudo apt-get -y install ubuntu-desktop # Something smaller?
 sudo apt-get -y install curl
