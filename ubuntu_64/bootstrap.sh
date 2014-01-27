@@ -26,6 +26,11 @@ sudo mv lein /bin
 sudo chmod u+x /bin/lein
 
 
+mkdir ~/Desktop/
+sudo chown dev ~/Desktop
+sudo chgrp dev ~/Desktop
+
+
 # TEST: launch ccw, new clojure project, run > run, as Clojure Application. get REPL?
 mkdir -p editors/counterclockwise
 cd editors/counterclockwise
