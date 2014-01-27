@@ -45,6 +45,10 @@ ln -s $(pwd)/Counterclockwise ~/Desktop/
 cd ~
 
 
+log "Installing Guest Additions."
+mount -o loop ~/VBoxGuestAdditions.iso /mnt
+/mnt/VBoxLinuxAdditions.run
+umount /mnt
 
 
 log "Removing default net rules."
