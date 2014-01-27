@@ -8,13 +8,12 @@ set -e
 # TODO Paths.
 
 
-# Clean any existing build cruft.
-rm -rf output-virtualbox-iso/
-rm -rf ~/VirtualBox\ VMs/packer-virtualbox/
+# Remove older VM.
+VBoxManage unregistervm packer-virtualbox-iso --delete 2> /dev/null || true
 
 
 # Do Packer build.
-packer build ubuntu_64/ubuntu_64.json
+packer build -force ubuntu_64/ubuntu_64.json
 
 
 # ./output/ovf -> ~/VirtualBox VMs/packer-virtualbox/
