@@ -1,6 +1,6 @@
 Boomstick
 =========
-![](https://photos-2.dropbox.com/t/0/AADpT867qBxuto9mjAheUF257NjKeuEm1IDHUpHzg3wpnw/12/40660795/png/1024x768/3/1390600800/0/2/Screenshot%202014-01-24%2015.42.31.png/GahQ7eLcm56bK89JIJINX1rTSdJlHHzoyumVrsCNJFw)
+![](resources/boom.png)
 ### Success criteria
 
 * We provide a VirtualBox image that anyone can download or
