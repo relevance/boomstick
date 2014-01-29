@@ -41,7 +41,7 @@ log "Installing Counterclockwise."
 mkdir -p editors/counterclockwise
 cd editors/counterclockwise
 curl -O $SRV/ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
-unzip ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
+unzip -q ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
 ln -s $(pwd)/Counterclockwise ~/Desktop/
 cd ~
 
@@ -52,7 +52,7 @@ DATOMIC_RUN_DIR="/home/dev/$DATOMIC_VERSION"
 mkdir tmp
 cd tmp
 curl -L -O $SRV/$DATOMIC_VERSION.zip
-unzip $DATOMIC_VERSION.zip -d ~/
+unzip -q $DATOMIC_VERSION.zip -d ~/
 cd $DATOMIC_RUN_DIR
 bin/maven-install
 cd ~
