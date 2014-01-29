@@ -37,9 +37,9 @@ sudo chgrp dev ~/Desktop
 
 
 # TEST: launch ccw, new clojure project, run > run, as Clojure Application. get REPL?
+log "Installing Counterclockwise."
 mkdir -p editors/counterclockwise
 cd editors/counterclockwise
-log "Installing Counterclockwise."
 curl -O $SRV/ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
 unzip ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
 ln -s $(pwd)/Counterclockwise ~/Desktop/
