@@ -30,11 +30,9 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
 #### Softwares
     TODO: Add IntelliJ + Cursive.
     TODO: Add Emacs, Cider, nRepl, Clojure-mode.
-    TODO: Add Datomic Free.
 
 #### Bonus
     TODO: LightTable
-    TODO: Datomic auto-starts at boot time, with persistent storage under /var/datomic
     TODO: Nightcode
     TODO: Heroku gem installed for quick-and-dirty deploys
 
