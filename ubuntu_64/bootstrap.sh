@@ -20,6 +20,7 @@ sudo apt-get -y install git
 sudo apt-get -y install ubuntu-desktop # Something smaller?
 sudo apt-get -y install curl
 sudo apt-get -y install default-jre
+sudo apt-get -y install maven
 # Support GuestAdditions in case of post-install kernel upgrade.
 sudo apt-get -y install dkms
 
