@@ -31,9 +31,23 @@ sudo mv lein /bin
 sudo chmod u+x /bin/lein
 
 
+log "Downloading editor configs."
+cd ~
+wget --recursive --no-parent --no-host-directories --reject "index.html*" $SRV/editor_configs/
+
+
 mkdir ~/Desktop/
 sudo chown dev ~/Desktop
 sudo chgrp dev ~/Desktop
+
+
+log "Installing emacs."
+sudo add-apt-repository -y ppa:cassou/emacs
+sudo apt-get update
+sudo apt-get -y install emacs24
+ln -s ~/editor_configs/emacs ~/.emacs.d
+ln -s $(which emacs) ~/Desktop/
+
 
 
 # TEST: launch ccw, new clojure project, run > run, as Clojure Application. get REPL?

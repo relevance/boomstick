@@ -29,7 +29,6 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
 
 #### Softwares
     TODO: Add IntelliJ + Cursive.
-    TODO: Add Emacs, Cider, nRepl, Clojure-mode.
 
 #### Bonus
     TODO: LightTable
