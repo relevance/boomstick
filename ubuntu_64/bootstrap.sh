@@ -36,8 +36,6 @@ wget --recursive --no-parent --no-host-directories --reject "index.html*" $SRV/e
 
 
 mkdir ~/Desktop/
-sudo chown dev ~/Desktop
-sudo chgrp dev ~/Desktop
 
 
 log "Installing emacs."
@@ -110,6 +108,11 @@ script
     exec sudo -u \${RUN_USER} sh -c "\${RUN_CMD} >> \${RUN_LOG} 2>&1"
 end script
 EOF
+
+
+Log "Correcting permissions in ~dev"
+sudo chown dev ~
+sudo chgrp dev ~
 
 
 log "Installing Guest Additions."
