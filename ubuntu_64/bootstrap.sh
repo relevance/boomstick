@@ -28,8 +28,7 @@ sudo apt-get -y install dkms
 log "Installing lein."
 curl -O https://raw.github.com/technomancy/leiningen/stable/bin/lein
 sudo mv lein /bin
-sudo chmod u+x /bin/lein
-
+sudo chmod 755 /bin/lein
 
 log "Downloading editor configs."
 cd ~
