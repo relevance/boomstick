@@ -70,7 +70,7 @@ cd ~
 rm -rf tmp
 
 
-log "Configuring Datompic service."
+log "Configuring Datomic service."
 DATOMIC_LOG_DIR="$DATOMIC_RUN_DIR/log"
 DATOMIC_DATA_DIR="/var/datomic"
 ORIG_DATOMIC_TRANSACTOR_PROPERTIES_FILE=$DATOMIC_RUN_DIR/config/samples/free-transactor-template.properties
