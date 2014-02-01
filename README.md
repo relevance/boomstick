@@ -29,6 +29,7 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
 
 #### Softwares
     TODO: Add IntelliJ + Cursive.
+    TODO: Add mbrainz dataset.
 
 #### Bonus
     TODO: LightTable
