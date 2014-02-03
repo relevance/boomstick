@@ -19,7 +19,7 @@ fi
 
 
 echo "Ensuring the contents of $ARCHIVE are mirrored in srv."
-cp -n $ARCHIVE/* srv &> /dev/null
+cp $ARCHIVE/* srv &> /dev/null
 
 
 if [ ! -a "srv/editor_configs" ]; then
