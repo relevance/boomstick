@@ -9,6 +9,25 @@ set -e
 # TODO Paths.
 
 
+ARCHIVE=/Users/daemian/src/boomstick/srv
+
+
+if [ ! -d "srv" ]; then
+    echo "Creating srv directory."
+    mkdir srv
+fi
+
+
+echo "Ensuring the contents of $ARCHIVE are mirrored in srv."
+cp -n $ARCHIVE/* srv &> /dev/null
+
+
+if [ ! -a "srv/editor_configs" ]; then
+    echo "Symlinking $(pwd)/editor_configs in srv."
+    ln -s $(pwd)/editor_configs srv/
+fi
+
+
 # Remove older VM.
 VBoxManage unregistervm packer-virtualbox-iso --delete 2> /dev/null || true
 
