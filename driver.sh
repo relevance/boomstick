@@ -22,7 +22,7 @@ echo "Ensuring the contents of $ARCHIVE are mirrored in srv."
 cp $ARCHIVE/* srv &> /dev/null
 
 
-if [ ! -a "srv/editor_configs" ]; then
+if [ ! -h "srv/editor_configs" ]; then
     echo "Symlinking $(pwd)/editor_configs in srv."
     ln -s $(pwd)/editor_configs srv/
 fi
