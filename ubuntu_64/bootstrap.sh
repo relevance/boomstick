@@ -46,6 +46,16 @@ ln -s ~/editor_configs/emacs ~/.emacs.d
 ln -s $(which emacs) ~/Desktop/
 
 
+log "Installing vim."
+sudo apt-get install -y vim
+ln -s ~/editor_configs/vim/.vimrc ~/.vimrc
+vim +BundleInstall +qall
+# TEST: This cannot be the easiest way to test Clojure connectivity.
+# lein new foo; cd foo; lein repl;
+# launch vim, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
+
+
+
 
 # TEST: launch ccw, new clojure project, run > run, as Clojure Application. get REPL?
 log "Installing Counterclockwise."

@@ -28,6 +28,11 @@ if [ ! -h "srv/editor_configs" ]; then
 fi
 
 
+echo "Updating submodules."
+git submodule init
+git submodule update
+
+
 # Remove older VM.
 VBoxManage unregistervm packer-virtualbox-iso --delete 2> /dev/null || true
 
