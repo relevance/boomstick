@@ -49,10 +49,11 @@ ln -s $(which emacs) ~/Desktop/
 log "Installing vim."
 sudo apt-get install -y vim
 ln -s ~/editor_configs/vim/.vimrc ~/.vimrc
+ln -s $(which gvim) ~/Desktop/
 vim +BundleInstall +qall
 # TEST: This cannot be the easiest way to test Clojure connectivity.
 # lein new foo; cd foo; lein repl;
-# launch vim, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
+# vim foo/project.clj, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
 
 
 
