@@ -121,8 +121,8 @@ EOF
 
 
 Log "Correcting permissions in ~dev"
-sudo chown dev ~
-sudo chgrp dev ~
+sudo chown -R dev ~dev
+sudo chgrp -R dev ~dev
 
 
 log "Installing Guest Additions."
