@@ -121,7 +121,7 @@ end script
 EOF
 
 
-Log "Correcting permissions in ~dev"
+log "Correcting permissions in ~dev"
 sudo chown -R dev ~dev
 sudo chgrp -R dev ~dev
 
