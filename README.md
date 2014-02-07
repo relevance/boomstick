@@ -37,7 +37,6 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
     TODO: Heroku gem installed for quick-and-dirty deploys
 
 #### Meta
-    TODO: Drive this all from CI, triggered by Github commit notice.
     TODO: Relativize paths in `driver.sh`.
     TODO: Find way to DRY up username/password repetition.
     TODO: Find real place from which to serve editor binaries.
