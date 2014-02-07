@@ -47,7 +47,7 @@ ln -s $(which emacs) ~/Desktop/
 
 
 log "Installing vim."
-sudo apt-get install -y vim
+sudo apt-get install -y vim vim-gnome
 ln -s ~/editor_configs/vim/.vimrc ~/.vimrc
 ln -s $(which gvim) ~/Desktop/
 vim +BundleInstall +qall
