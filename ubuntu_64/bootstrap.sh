@@ -90,6 +90,7 @@ cat > ~/Desktop/cursive.sh <<EOF
 #!/bin/bash
 JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 ~/editors/cursive/bin/idea.sh
 EOF
+chmod 755 ~/Desktop/cursive.sh
 
 curl -O $SRV/cursive-13-0.1.14.zip
 ln -s ~/editor_configs/cursive ~/.IdeaIC13
