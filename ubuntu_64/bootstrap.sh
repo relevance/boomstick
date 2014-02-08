@@ -24,6 +24,8 @@ sudo apt-get -y install maven
 # Support GuestAdditions in case of post-install kernel upgrade.
 sudo apt-get -y install dkms
 
+sudo apt-get install -y openjdk-7-jdk
+
 
 log "Installing lein."
 curl -O https://raw.github.com/technomancy/leiningen/stable/bin/lein
@@ -58,13 +60,41 @@ vim +BundleInstall +qall
 
 
 
-# TEST: launch ccw, new clojure project, run > run, as Clojure Application. get REPL?
+# TEST: lein new foo; launch ccw, new clojure project, run > run, as Clojure Application. get REPL?
 log "Installing Counterclockwise."
 mkdir -p editors/counterclockwise
 cd editors/counterclockwise
 curl -O $SRV/ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
 unzip -q ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
 ln -s $(pwd)/Counterclockwise ~/Desktop/
+cd ~
+
+
+# TEST: lein new foo; Launch cursive and Import Project.
+# Should have "Leiningen project" as dialog text up top.
+# Navigate to Lein project directory, hit OK.
+# Import project from existing model, Leiningen.
+# Accept defaults on remaining dialogs; SDK should be filled in already.
+# After indexing, Run > Edit Configurations, click left-hand +,
+# choose Clojure REPL > Local, accept defaults.
+# Click green Play triangle at upper-right-hand corner.
+# Should launch a REPL that can evaluate (+ 1 1)
+log "Installing Cursive."
+mkdir -p editors
+cd editors
+curl -O $SRV/ideaIC-133.818.tar.gz
+tar xzvf ideaIC-133.818.tar.gz
+mv idea-IC-133.818 cursive
+
+cat > ~/Desktop/cursive.sh <<EOF
+#!/bin/bash
+JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 ~/editors/cursive/bin/idea.sh
+EOF
+
+curl -O $SRV/cursive-13-0.1.14.zip
+ln -s ~/editor_configs/cursive ~/.IdeaIC13
+mkdir -p ~/.IdeaIC13/config/plugins
+unzip cursive-13-0.1.14.zip -d ~/.IdeaIC13/config/plugins
 cd ~
 
 

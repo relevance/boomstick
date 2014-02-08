@@ -28,8 +28,8 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
 ### Next steps
 
 #### Softwares
-    TODO: Add IntelliJ + Cursive.
     TODO: Add mbrainz dataset.
+    TODO: Pretty icons on desktop?
 
 #### Bonus
     TODO: LightTable
@@ -41,4 +41,5 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
     TODO: Find way to DRY up username/password repetition.
     TODO: Find real place from which to serve editor binaries.
     TODO: Is there an ubuntu-desktop-minimal package?
+    TODO: Is there a better means of configuring Cursive?
 
