@@ -12,7 +12,7 @@ log() {
   echo; echo; echo "** $1"; echo; echo;
 }
 
-function shortcut_text() {
+shortcut_text() {
 cat <<-EOF
 [Desktop Entry]
 Version=1.0
@@ -24,7 +24,7 @@ Type=Application
 EOF
 }
 
-function make_desktop_shortcut() {
+make_desktop_shortcut() {
   SHORTCUT=~/Desktop/$1.desktop
   shortcut_text $1 $2 $3 > $SHORTCUT
   chmod 755 $SHORTCUT
