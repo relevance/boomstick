@@ -39,11 +39,10 @@ sudo apt-get -y install git
 sudo apt-get -y install ubuntu-desktop # Something smaller?
 sudo apt-get -y install curl
 sudo apt-get -y install default-jre
+sudo apt-get -y install openjdk-7-jdk
 sudo apt-get -y install maven
 # Support GuestAdditions in case of post-install kernel upgrade.
 sudo apt-get -y install dkms
-
-sudo apt-get install -y openjdk-7-jdk
 
 
 log "Installing lein."
@@ -67,14 +66,14 @@ ln -s ~/editor_configs/emacs ~/.emacs.d
 cp /usr/share/applications/emacs24.desktop ~/Desktop/
 chmod 755 ~/Desktop/emacs24.desktop
 
+# TEST: This cannot be the easiest way to test Clojure connectivity.
+# lein new foo; cd foo; lein repl;
+# vim foo/project.clj, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
 log "Installing vim."
 sudo apt-get install -y vim vim-gnome
 ln -s ~/editor_configs/vim/.vimrc ~/.vimrc
 make_desktop_shortcut gvim $(which gvim) /usr/share/pixmaps/vim-32.xpm
 vim +BundleInstall +qall
-# TEST: This cannot be the easiest way to test Clojure connectivity.
-# lein new foo; cd foo; lein repl;
-# vim foo/project.clj, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
 
 log "Installing LightTable."
 mkdir -p editors
@@ -87,7 +86,8 @@ make_desktop_shortcut LightTable \
 cd ~
 
 
-# TEST: lein new foo; launch ccw, new clojure project, run > run, as Clojure Application. get REPL?
+# TEST: lein new foo; launch ccw, new clojure project, run > run, as
+# Clojure Application. Get REPL?
 log "Installing Counterclockwise."
 mkdir -p editors/counterclockwise
 cd editors/counterclockwise
