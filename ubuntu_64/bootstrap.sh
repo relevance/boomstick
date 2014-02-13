@@ -1,3 +1,5 @@
+#!/usr/bin/env bash -x
+
 # Wait for SSH.
 sleep 30
 
@@ -41,6 +43,7 @@ sudo apt-get -y install curl
 sudo apt-get -y install default-jre
 sudo apt-get -y install openjdk-7-jdk
 sudo apt-get -y install maven
+
 # Support GuestAdditions in case of post-install kernel upgrade.
 sudo apt-get -y install dkms
 
