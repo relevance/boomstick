@@ -12,6 +12,25 @@ log() {
   echo; echo; echo "** $1"; echo; echo;
 }
 
+function shortcut_text() {
+cat <<-EOF
+[Desktop Entry]
+Version=1.0
+Name=$1
+Exec=$2
+Icon=$3
+Terminal=false
+Type=Application
+EOF
+}
+
+function make_desktop_shortcut() {
+  SHORTCUT=~/Desktop/$1.desktop
+  shortcut_text $1 $2 $3 > $SHORTCUT
+  chmod 755 $SHORTCUT
+}
+
+
 
 sudo apt-get update
 sudo apt-get dist-upgrade
@@ -45,18 +64,17 @@ sudo add-apt-repository -y ppa:cassou/emacs
 sudo apt-get update
 sudo apt-get -y install emacs24
 ln -s ~/editor_configs/emacs ~/.emacs.d
-ln -s $(which emacs) ~/Desktop/
-
+cp /usr/share/applications/emacs24.desktop ~/Desktop/
+chmod 755 ~/Desktop/emacs24.desktop
 
 log "Installing vim."
 sudo apt-get install -y vim vim-gnome
 ln -s ~/editor_configs/vim/.vimrc ~/.vimrc
-ln -s $(which gvim) ~/Desktop/
+make_desktop_shortcut gvim $(which gvim) /usr/share/pixmaps/vim-32.xpm
 vim +BundleInstall +qall
 # TEST: This cannot be the easiest way to test Clojure connectivity.
 # lein new foo; cd foo; lein repl;
 # vim foo/project.clj, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
-
 
 log "Installing LightTable."
 mkdir -p editors
@@ -75,7 +93,9 @@ mkdir -p editors/counterclockwise
 cd editors/counterclockwise
 curl -O $SRV/ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
 unzip -q ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
-ln -s $(pwd)/Counterclockwise ~/Desktop/
+make_desktop_shortcut CounterClockwise \
+                      $(pwd)/Counterclockwise \
+                      $(pwd)/icon.xpm
 cd ~
 
 
@@ -95,11 +115,15 @@ curl -O $SRV/ideaIC-133.818.tar.gz
 tar xzvf ideaIC-133.818.tar.gz
 mv idea-IC-133.818 cursive
 
-cat > ~/Desktop/cursive.sh <<EOF
+CURSIVE_WRAPPER=$(pwd)/cursive/cursive.sh
+cat > $CURSIVE_WRAPPER <<EOF
 #!/bin/bash
-JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 ~/editors/cursive/bin/idea.sh
+JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 $(pwd)/cursive/bin/idea.sh
 EOF
-chmod 755 ~/Desktop/cursive.sh
+chmod 755 $CURSIVE_WRAPPER
+make_desktop_shortcut Cursive \
+                      $CURSIVE_WRAPPER \
+                      $(pwd)/cursive/bin/idea.png
 
 curl -O $SRV/cursive-13-0.1.14.zip
 ln -s ~/editor_configs/cursive ~/.IdeaIC13
