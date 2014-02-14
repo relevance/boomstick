@@ -68,6 +68,7 @@ sudo apt-get -y install emacs24
 ln -s ~/editor_configs/emacs ~/.emacs.d
 cp /usr/share/applications/emacs24.desktop ~/Desktop/
 chmod 755 ~/Desktop/emacs24.desktop
+cd ~
 
 # TEST: This cannot be the easiest way to test Clojure connectivity.
 # lein new foo; cd foo; lein repl;
