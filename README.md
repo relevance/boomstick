@@ -32,7 +32,6 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
     TODO: Pretty icons on desktop?
 
 #### Bonus
-    TODO: LightTable
     TODO: Nightcode
     TODO: Heroku gem installed for quick-and-dirty deploys
 

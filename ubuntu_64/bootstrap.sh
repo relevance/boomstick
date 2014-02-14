@@ -58,6 +58,15 @@ vim +BundleInstall +qall
 # vim foo/project.clj, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
 
 
+log "Installing LightTable."
+mkdir -p editors
+cd editors
+curl -O $SRV/LightTableLinux64.tar.gz
+tar xzvf LightTableLinux64.tar.gz
+make_desktop_shortcut LightTable \
+                      $(pwd)/LightTable/LightTable \
+                      $(pwd)/LightTable/core/img/lticon.png
+cd ~
 
 
 # TEST: lein new foo; launch ccw, new clojure project, run > run, as Clojure Application. get REPL?
