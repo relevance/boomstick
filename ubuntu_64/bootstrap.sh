@@ -1,13 +1,31 @@
 #!/usr/bin/env bash -x
 
+SERVER=${SERVER:-https://s3.amazonaws.com/boomstick}
+
+LEIN_URL=https://raw.github.com/technomancy/leiningen/stable/bin/lein
+
+LIGHTTABLE_ARCHIVE=LightTableLinux64.tar.gz
+LIGHTTABLE_URL=$SERVER/$LIGHTTABLE_ARCHIVE
+
+COUNTERCLOCKWISE_ARCHIVE=ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
+COUNTERCLOCKWISE_URL=$SERVER/$COUNTERCLOCKWISE_ARCHIVE
+
+IDEA_ARCHIVE=ideaIC-133.818.tar.gz
+IDEA_URL=$SERVER/$IDEA_ARCHIVE
+
+CURSIVE_ARCHIVE=cursive-13-0.1.14.zip
+CURSIVE_URL=$SERVER/$CURSIVE_ARCHIVE
+
+DATOMIC_VERSION="datomic-free-0.9.4470"
+DATOMIC_ARCHIVE=$DATOMIC_VERSION.zip
+DATOMIC_URL=$SERVER/$DATOMIC_ARCHIVE
+DATOMIC_RUN_DIR="/home/dev/$DATOMIC_VERSION"
+DATOMIC_LOG_DIR="$DATOMIC_RUN_DIR/log"
+DATOMIC_DATA_DIR="/var/datomic"
+
+
 # Wait for SSH.
 sleep 30
-
-
-# Automate. How do we want to store these binaries?
-# S3? Will downloading them all make builds take a long time?
-# For now, cd srv && python -m SimpleHTTPServer
-SRV=http://10.0.1.13:8000
 
 
 log() {
@@ -49,13 +67,13 @@ sudo apt-get -y install dkms
 
 
 log "Installing lein."
-curl -O https://raw.github.com/technomancy/leiningen/stable/bin/lein
+curl -O $LEIN_URL
 sudo mv lein /bin
 sudo chmod 755 /bin/lein
 
 log "Downloading editor configs."
 cd ~
-wget --recursive --no-parent --no-host-directories --reject "index.html*" $SRV/editor_configs/
+wget --recursive --no-parent --no-host-directories --reject "index.html*" http://10.0.1.13:8000/editor_configs/
 
 
 mkdir ~/Desktop/
@@ -82,8 +100,8 @@ vim +BundleInstall +qall
 log "Installing LightTable."
 mkdir -p editors
 cd editors
-curl -O $SRV/LightTableLinux64.tar.gz
-tar xzvf LightTableLinux64.tar.gz
+curl -O $LIGHTTABLE_URL
+tar xzvf $LIGHTTABLE_ARCHIVE
 make_desktop_shortcut LightTable \
                       $(pwd)/LightTable/LightTable \
                       $(pwd)/LightTable/core/img/lticon.png
@@ -95,8 +113,8 @@ cd ~
 log "Installing Counterclockwise."
 mkdir -p editors/counterclockwise
 cd editors/counterclockwise
-curl -O $SRV/ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
-unzip -q ccw-0.23.0.STABLE001-linux.gtk.x86_64.zip
+curl -O $COUNTERCLOCKWISE_URL
+unzip -q $COUNTERCLOCKWISE_ARCHIVE
 make_desktop_shortcut CounterClockwise \
                       $(pwd)/Counterclockwise \
                       $(pwd)/icon.xpm
@@ -115,8 +133,8 @@ cd ~
 log "Installing Cursive."
 mkdir -p editors
 cd editors
-curl -O $SRV/ideaIC-133.818.tar.gz
-tar xzvf ideaIC-133.818.tar.gz
+curl -O $IDEA_URL
+tar xzvf $IDEA_ARCHIVE
 mv idea-IC-133.818 cursive
 
 CURSIVE_WRAPPER=$(pwd)/cursive/cursive.sh
@@ -129,20 +147,18 @@ make_desktop_shortcut Cursive \
                       $CURSIVE_WRAPPER \
                       $(pwd)/cursive/bin/idea.png
 
-curl -O $SRV/cursive-13-0.1.14.zip
+curl -O $CURSIVE_URL
 ln -s ~/editor_configs/cursive ~/.IdeaIC13
 mkdir -p ~/.IdeaIC13/config/plugins
-unzip cursive-13-0.1.14.zip -d ~/.IdeaIC13/config/plugins
+unzip $CURSIVE_ARCHIVE -d ~/.IdeaIC13/config/plugins
 cd ~
 
 
 log "Installing Datomic Free."
-DATOMIC_VERSION="datomic-free-0.9.4470"
-DATOMIC_RUN_DIR="/home/dev/$DATOMIC_VERSION"
 mkdir tmp
 cd tmp
-curl -L -O $SRV/$DATOMIC_VERSION.zip
-unzip -q $DATOMIC_VERSION.zip -d ~/
+curl -O $DATOMIC_URL
+unzip -q $DATOMIC_ARCHIVE -d ~/
 cd $DATOMIC_RUN_DIR
 bin/maven-install
 cd ~
@@ -150,8 +166,6 @@ rm -rf tmp
 
 
 log "Configuring Datomic service."
-DATOMIC_LOG_DIR="$DATOMIC_RUN_DIR/log"
-DATOMIC_DATA_DIR="/var/datomic"
 ORIG_DATOMIC_TRANSACTOR_PROPERTIES_FILE=$DATOMIC_RUN_DIR/config/samples/free-transactor-template.properties
 CUSTOM_DATOMIC_TRANSACTOR_PROPERTIES_FILE=$DATOMIC_RUN_DIR/transactor.conf
 
