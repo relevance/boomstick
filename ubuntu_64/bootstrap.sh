@@ -1,4 +1,10 @@
-#!/usr/bin/env bash -x
+#!/usr/bin/env bash
+
+set -o xtrace
+set -o errexit
+set -o pipefail
+set -o nounset
+
 
 SERVER=${SERVER:-https://s3.amazonaws.com/boomstick}
 
