@@ -216,7 +216,8 @@ sudo chgrp -R dev ~dev
 
 log "Installing Guest Additions."
 mount -o loop ~/VBoxGuestAdditions.iso /mnt
-/mnt/VBoxLinuxAdditions.run
+# Script exits with non-zero code even when successful.
+/mnt/VBoxLinuxAdditions.run || true
 umount /mnt
 
 
