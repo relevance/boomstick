@@ -76,9 +76,14 @@ curl -O $LEIN_URL
 sudo mv lein /bin
 sudo chmod 755 /bin/lein
 
-log "Downloading editor configs."
+
+log "Cloning editor configs."
+git clone https://github.com/relevance/boomstick-editor-configs.git editor_configs
+cd editor_configs
+log "Updating editor-config submodules."
+git submodule init
+git submodule update
 cd ~
-wget --recursive --no-parent --no-host-directories --reject "index.html*" http://10.0.1.13:8000/editor_configs/
 
 
 mkdir ~/Desktop/

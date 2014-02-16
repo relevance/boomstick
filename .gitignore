@@ -1,7 +1,2 @@
-/srv
 /packer_cache
 /output-virtualbox-iso
-
-editor_configs/emacs/.autosaves
-editor_configs/emacs/elpa
-editor_configs/emacs/history
