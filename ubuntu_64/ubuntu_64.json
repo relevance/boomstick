@@ -2,10 +2,12 @@
     "variables": {
         "ssh_name": "dev",
         "ssh_pass": "dev",
-        "hostname": "boomstick"
+        "hostname": "boomstick",
+        "vm_name": "{{ env `VM_NAME` }}"
     },
 
     "builders": [{
+        "vm_name": "{{ user `vm_name` }}",
         "type": "virtualbox-iso",
         "guest_os_type": "Ubuntu_64",
 
