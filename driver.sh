@@ -8,6 +8,8 @@
 set -o xtrace
 
 
+export USERNAME=dev
+export PASSWORD=dev
 export VM_NAME="boomstick"
 
 

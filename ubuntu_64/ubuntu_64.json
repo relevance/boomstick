@@ -1,13 +1,13 @@
 {
     "variables": {
-        "ssh_name": "dev",
-        "ssh_pass": "dev",
-        "hostname": "boomstick",
-        "vm_name": "{{ env `VM_NAME` }}"
+        "USERNAME": "{{ env `USERNAME` }}",
+        "PASSWORD": "{{ env `PASSWORD` }}",
+        "HOSTNAME": "{{ env `VM_NAME` }}",
+        "VM_NAME":  "{{ env `VM_NAME` }}"
     },
 
     "builders": [{
-        "vm_name": "{{ user `vm_name` }}",
+        "vm_name": "{{ user `VM_NAME` }}",
         "type": "virtualbox-iso",
         "guest_os_type": "Ubuntu_64",
 
@@ -25,18 +25,18 @@
         "http_port_min" : 9001,
         "http_port_max" : 9001,
 
-        "ssh_username": "{{user `ssh_name`}}",
-        "ssh_password": "{{user `ssh_pass`}}",
+        "ssh_username": "{{ user `USERNAME` }}",
+        "ssh_password": "{{ user `PASSWORD` }}",
         "ssh_wait_timeout": "20m",
 
-        "shutdown_command": "echo {{user `ssh_pass`}} | sudo -S shutdown -P now",
+        "shutdown_command": "echo {{ user `PASSWORD` }} | sudo -S shutdown -P now",
 
         "boot_command" : [
             "<esc><esc><enter><wait>",
             "/install/vmlinuz noapic ",
             "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
             "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-            "hostname={{user `hostname`}} ",
+            "hostname={{user `HOSTNAME`}} ",
             "fb=false debconf/frontend=noninteractive ",
             "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
             "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
@@ -46,7 +46,7 @@
 
     "provisioners": [{
         "type": "shell",
-        "execute_command": "echo 'dev' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+        "execute_command": "echo {{ user `PASSWORD` }} | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
         "script": "ubuntu_64/bootstrap.sh"
     }]
 }
