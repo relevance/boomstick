@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-set -o xtrace
-
 
 # Run me from root level of project.
 # Will use system ISOs in ./packer_cache if available.
+
+
+set -o xtrace
 
 
 export VM_NAME="boomstick"
