@@ -7,7 +7,7 @@ set -o xtrace
 # Will use system ISOs in ./packer_cache if available.
 
 
-export VM_NAME="packer-virtualbox-iso"
+export VM_NAME="boomstick"
 
 
 # Remove older VM.
