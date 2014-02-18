@@ -34,9 +34,45 @@ DATOMIC_DATA_DIR="/var/datomic"
 sleep 30
 
 
+elapsed_summary=("Time spent on actions...")
+previous_job=
 log() {
+  set +o xtrace
   echo; echo; echo "** $1"; echo; echo;
+
+  # Store a running summary of elapsed times for each job.
+  if [ -n "$previous_job" ]; then
+    # Store time delta from last invocation.
+    delta=$(($SECONDS-$last_start))
+    h=$(($delta/3600))
+    m=$(($delta%3600/60))
+    s=$(($delta%60))
+    previous_job_text="$(printf "%02d:%02d:%02d %s" $h $m $s "$previous_job")"
+    elapsed_summary=("${elapsed_summary[@]}" "$previous_job_text")
+  fi
+
+  previous_job="$1"
+  last_start=$SECONDS
+  set -o xtrace
 }
+
+cleanup() {
+  log "Boomstick bootstrap finished with exit code $?."
+
+  set +o xtrace  # Prevent confusing double output.
+  printf "\n\n\n"
+  for item in "${elapsed_summary[@]}"; do
+    printf "%s\n" "$item";
+  done
+  printf "\n\n\n"
+
+  # Make VirtualBox wait for our printfs to finish.
+  # Why is this necessary?
+  sleep 10
+}
+
+trap cleanup EXIT
+
 
 shortcut_text() {
 cat <<-EOF
@@ -57,7 +93,7 @@ make_desktop_shortcut() {
 }
 
 
-
+log "Installing apt-get packages."
 sudo apt-get update
 
 sudo apt-get -y install git
@@ -70,12 +106,10 @@ sudo apt-get -y install maven
 # Support GuestAdditions in case of post-install kernel upgrade.
 sudo apt-get -y install dkms
 
-
 log "Installing lein."
 curl -O $LEIN_URL
 sudo mv lein /bin
 sudo chmod 755 /bin/lein
-
 
 log "Cloning editor configs."
 git clone https://github.com/relevance/boomstick-editor-configs.git editor_configs
@@ -117,7 +151,6 @@ make_desktop_shortcut LightTable \
                       $(pwd)/LightTable/core/img/lticon.png
 cd ~
 
-
 # TEST: lein new foo; launch ccw, new clojure project, run > run, as
 # Clojure Application. Get REPL?
 log "Installing Counterclockwise."
@@ -129,7 +162,6 @@ make_desktop_shortcut CounterClockwise \
                       $(pwd)/Counterclockwise \
                       $(pwd)/icon.xpm
 cd ~
-
 
 # TEST: lein new foo; Launch cursive and Import Project.
 # Should have "Leiningen project" as dialog text up top.
@@ -163,7 +195,6 @@ mkdir -p ~/.IdeaIC13/config/plugins
 unzip $CURSIVE_ARCHIVE -d ~/.IdeaIC13/config/plugins
 cd ~
 
-
 log "Installing Datomic Free."
 mkdir tmp
 cd tmp
@@ -173,7 +204,6 @@ cd $DATOMIC_RUN_DIR
 bin/maven-install
 cd ~
 rm -rf tmp
-
 
 log "Configuring Datomic service."
 ORIG_DATOMIC_TRANSACTOR_PROPERTIES_FILE=$DATOMIC_RUN_DIR/config/samples/free-transactor-template.properties
@@ -212,7 +242,6 @@ script
 end script
 EOF
 
-
 log "Correcting permissions in ~dev"
 sudo chown -R dev ~dev
 sudo chgrp -R dev ~dev
@@ -223,7 +252,6 @@ mount -o loop ~/VBoxGuestAdditions.iso /mnt
 # Script exits with non-zero code even when successful.
 /mnt/VBoxLinuxAdditions.run || true
 umount /mnt
-
 
 log "Removing default net rules."
 rm /etc/udev/rules.d/70-persistent-net.rules
