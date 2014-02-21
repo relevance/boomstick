@@ -22,7 +22,28 @@ with no further config, etc.
 
 Run `./driver.sh` and STAND BACK.
 
-Prepend `PACKER_LOG=1` to see Packer debug messages.
+
+### Program Flow
+
+`driver.sh` will...
+
+- Launch packer to build a new VM named 'boomstick'.
+-- The new VM comprises an OVF file and a VMDK file.
+--- These will be placed into `./output-virtualbox-iso`.
+- Upload the two VM files to S3.
+
+This assumes...
+
+- [Packer](http://www.packer.io/) is in your path.
+- [s3cmd](http://s3tools.org/download) is configured and in your path.
+
+
+### AWS Integration
+
+The VM files will be uploaded to Cognitect's 'boomstick/images' bucket and will be publicly readable.
+
+Uploading is restricted to the 'boomstick' user, so `s3cmd` must be
+configured with the corresponding IAM credentials.
 
 
 ### Next steps
@@ -35,7 +56,6 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
 - ~~TODO: Add vim.~~
 - ~~TODO: Add Maven.~~
 - ~~TODO: Add Datomic Free.~~
-
 
 #### Bonus
 - TODO: Nightcode
@@ -54,3 +74,12 @@ Prepend `PACKER_LOG=1` to see Packer debug messages.
 - ~~TODO: Desktop editor symlinks not currently visible.~~
 - ~~TODO: Fix post-import network connectivity issue?~~
 - ~~TODO: Drive this all from CI, triggered by Github commit notice.~~
+
+
+### Debugging
+
+Prepend `PACKER_LOG=1` to `driver.sh`'s invocation of packer to see Packer debug messages.
+
+Shell scripts have xtrace enabled in order to print each command
+executed to the console.
+
