@@ -27,10 +27,10 @@ Run `./driver.sh` and STAND BACK.
 
 `driver.sh` will...
 
-- Launch packer to build a new VM named 'boomstick'.
--- The new VM comprises an OVF file and a VMDK file.
---- These will be placed into `./output-virtualbox-iso`.
-- Upload the two VM files to S3.
+- Launch packer to build a new VM named 'boomstick'.  
+ - The new VM comprises an OVF file and a VMDK file.  
+   - These will be placed into `./output-virtualbox-iso`.  
+- Upload the two VM files to S3.  
 
 This assumes...
 
@@ -44,6 +44,8 @@ The VM files will be uploaded to Cognitect's 'boomstick/images' bucket and will 
 
 Uploading is restricted to the 'boomstick' user, so `s3cmd` must be
 configured with the corresponding IAM credentials.
+
+Skip this upload by prepending SKIP_UPLOAD=1 when executing `driver.sh`.
 
 
 ### Next steps
