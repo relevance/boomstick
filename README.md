@@ -27,7 +27,8 @@ Run `./driver.sh` and STAND BACK.
 
 `driver.sh` will...
 
-- Launch packer to build a new VM named 'boomstick'.  
+- Launch packer to build a new Ubuntu VM named 'boomstick'.  
+ - Run `ubuntu_64/bootstrap.sh` to finish provisioning the new VM.  
  - The new VM comprises an OVF file and a VMDK file.  
    - These will be placed into `./output-virtualbox-iso`.  
 - Upload the two VM files to S3.  
