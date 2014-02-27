@@ -41,7 +41,7 @@ This assumes...
 
 ### AWS Integration
 
-The VM files will be uploaded to Cognitect's 'boomstick/images' bucket and will be publicly readable.
+The new VM files will be uploaded to Cognitect's 'boomstick/images' bucket and will be publicly readable.
 
 Uploading is restricted to the 'boomstick' user, so `s3cmd` must be
 configured with the corresponding IAM credentials.
