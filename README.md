@@ -1,5 +1,23 @@
 ## Boomstick
 ![](resources/boom.png)
+
+Boomstick tries to make it easier to explore Clojure and Datomic by generating an Ubuntu image containing a selection of Clojure editors, Datomic, and supporting software.
+
+Editors:
+- Emacs (CLI and GUI)  
+- Vim (CLI and GUI)  
+- LightTable
+- CounterClockwise  
+- Cursive  
+
+These editors are all pre-configured for editing Clojure.
+
+Software:
+- Datomic Free  
+- Leiningen  
+- Maven  
+
+
 #### Mission Statement
 
 * Provide a VirtualBox image that anyone can download or
@@ -24,7 +42,7 @@ Run `driver.sh` and STAND BACK.
 
 
 
-## Stick Preparation
+## Building the Stick
 
 As detailed below, executing `driver.sh` will upload files to install
 a VM image to the following URLs. Download these files and copy them
@@ -40,13 +58,15 @@ http://s3.amazonaws.com/mbrainz/datomic-mbrainz-backup-20130611.tar
 
 
 
-## Stick Consumption
+## Using the Stick
 
 Users can slot the USB sticks into their Linux or OSX computers,
 browse the filesystem and execute the `importer.sh` file.
 
 `importer.sh` will import the provided VM into the local VirtualBox
 library. The VM can then be started via the VirtualBox Manager interface.
+
+username/password: dev/dev
 
 Assumptions:
 
@@ -86,7 +106,7 @@ Skip this upload by prepending SKIP_UPLOAD=1 when executing `driver.sh`.
 
 
 
-## Making Changes
+## Making Changes to Boomstick
 
 #### Updating the driver
 
@@ -139,7 +159,7 @@ and execute `driver.sh` to update the VM files.
 
 
 
-## Debugging
+## Debugging the Driver
 
 Prepend `PACKER_LOG=1` to `driver.sh`'s invocation of packer to see Packer debug messages.
 
