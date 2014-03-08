@@ -23,6 +23,40 @@ with no further config, etc.
 Run `./driver.sh` and STAND BACK.
 
 
+
+### Stick Preparation
+
+As detailed below, this set of programs will produce updated files at
+the following URLs. Download these files and copy them to USB sticks
+for students to enjoy.
+
+https://s3.amazonaws.com/boomstick/image/boomstick.ovf
+https://s3.amazonaws.com/boomstick/image/boomstick-disk1.vmdk
+https://s3.amazonaws.com/boomstick/image/importer.sh
+
+It would be nifty to include the mbrainz dataset for later perusal.
+
+http://s3.amazonaws.com/mbrainz/datomic-mbrainz-backup-20130611.tar
+
+
+
+### Stick Consumption
+
+Students and others can slot the USB sticks into their Linux or OSX
+computers, browse the filesystem and execute the `importer.sh` file.
+
+`importer.sh` will import the provided VM into their VirtualBox
+library. Using the VirtualBox Manager interface, they can then start
+the VM.
+
+Assumptions:
+
+- [VirtualBox](https://www.virtualbox.org/wiki/Downloads) is already
+  installed on the host computer.  
+- VBoxManage is in the PATH.  
+
+
+
 ### Program Flow
 
 `driver.sh` will...
@@ -38,6 +72,10 @@ This assumes...
 - [Packer](http://www.packer.io/) is in your path.
 - [s3cmd](http://s3tools.org/download) is configured and in your path.
 
+Binaries are pulled down from apt repositories and from http://boomstick.s3.amazonaws.com/.
+
+Editor configs are fetched from https://github.com/relevance/boomstick-editor-configs.
+
 
 ### AWS Integration
 
@@ -47,6 +85,41 @@ Uploading is restricted to the 'boomstick' user, so `s3cmd` must be
 configured with the corresponding IAM credentials.
 
 Skip this upload by prepending SKIP_UPLOAD=1 when executing `driver.sh`.
+
+
+### Making Changes
+
+#### Updating the driver
+
+Make changes to the files in https://github.com/relevance/boomstick
+and execute `driver.sh` to update the VM images.
+
+#### Updating the installable software packages
+
+Ensure `ubuntu_64/bootstrap.sh` has an up-to-date install routine for
+the desired software package. Package binaries not in apt will
+need to be available at http://boomstick.s3.amazonaws.com/.
+
+Then, execute `driver.sh` to update the VM images.
+
+#### Updating the editor configs
+
+Make changes to the files in https://github.com/relevance/boomstick-editor-configs
+and execute `driver.sh` to update the VM images.
+
+### Jenkins
+
+Using the git plugin, Jenkins can be configured to learn of changes to
+a Git repo and then update the VM images.
+
+A webhook can be configured on Github to notify Jenkins when an update
+has been made to a repo. The git plugin responds to such a
+notification by doing a git fetch against the configured repo, and, if
+finding new changes, executing the build.
+
+The Multiple SCMs plugin will trigger a build on an update to either
+the boomstick or boomstick-editor-configs repos provided the repos
+are configured for notifications as above.
 
 
 ### Next steps
