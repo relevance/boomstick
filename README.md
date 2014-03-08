@@ -2,7 +2,7 @@
 ![](resources/boom.png)
 #### Mission Statement
 
-* We provide a VirtualBox image that anyone can download or
+* Provide a VirtualBox image that anyone can download or
 distribute on a memory stick for Clojure/ClojureScript/Datomic
 training.
 * (Lower priority) The same VirtualBox image works well for "beginner
@@ -171,15 +171,15 @@ are configured for notifications as above.
       - Local subdirectory for repo: boomstick  
     - Add repo: https://github.com/relevance/boomstick-editor-configs  
       - Local subdirectory for repo: boomstick-editor-configs  
-  - Add AnsiColor plugin  
-  - Check 'Build Environment > Color ANSI Console Output'  
+- Add AnsiColor plugin  
+  - Check 'Build Environment > Color ANSI Console Output'.  
     - Under 'ANSI Color Map' choose 'xterm'.  
   - Colorizes output of VirtualBox build.  
-- Check 'Build Triggers' > 'Poll SCM'  
+- Check 'Build Triggers' > 'Poll SCM'.  
   - Leave 'Schedule' unconfigured.  
-  - Allows builds to be triggered via webhook or (manual URL
-    request)[http://127.0.0.1:8080/git/notifyCommit?url=https://github.com/relevance/boomstick].  
-- Add to 'Build > Execute shell > Command': `boomstick/driver.sh`.  
+  - Allows builds to be triggered via webhook or [manual URL
+    request](http://127.0.0.1:8080/git/notifyCommit?url=https://github.com/relevance/boomstick).  
+- Add a 'Build > Execute shell > Command' of `boomstick/driver.sh`.  
 - Add 'Post-build Actions > E-Mail Notification' pointing to your
   email address.
   
