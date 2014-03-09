@@ -117,7 +117,7 @@ and execute `driver.sh` to update the VM files.
 
 Ensure `ubuntu_64/bootstrap.sh` has an up-to-date install routine for
 the desired software. Software not in apt will
-need to be available at http://boomstick.s3.amazonaws.com/.
+need to be available and publicly-readable at http://boomstick.s3.amazonaws.com/.
 
 Then, execute `driver.sh` to update the VM files.
 
