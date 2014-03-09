@@ -123,6 +123,9 @@ cd ~
 mkdir ~/Desktop/
 
 
+# Test: lein new foo; emacs foo project.clj
+# M-x cider-jack-in
+# (+ 1 1)
 log "Installing emacs."
 sudo add-apt-repository -y ppa:cassou/emacs
 sudo apt-get update
@@ -132,8 +135,7 @@ cp /usr/share/applications/emacs24.desktop ~/Desktop/
 chmod 755 ~/Desktop/emacs24.desktop
 cd ~
 
-# TEST: This cannot be the easiest way to test Clojure connectivity.
-# lein new foo; cd foo; lein repl;
+# TEST: lein new foo; cd foo; lein repl;
 # vim foo/project.clj, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
 log "Installing vim."
 sudo apt-get install -y vim vim-gnome
@@ -141,6 +143,9 @@ ln -s ~/editor_configs/vim/.vimrc ~/.vimrc
 make_desktop_shortcut gvim $(which gvim) /usr/share/pixmaps/vim-32.xpm
 vim +BundleInstall +qall
 
+# TEST: Launch LightTable. ctrl+space to open the Commands item.
+# Into the input box, type 'repl' and choose 'Instarepl: Open a Clojure
+# Instarepl'. Into that Instarepl, type (+ 1 1) and wait for deps.
 log "Installing LightTable."
 mkdir -p editors
 cd editors
@@ -151,8 +156,10 @@ make_desktop_shortcut LightTable \
                       $(pwd)/LightTable/core/img/lticon.png
 cd ~
 
-# TEST: lein new foo; launch ccw, new clojure project, run > run, as
-# Clojure Application. Get REPL?
+# TEST:launch ccw, choose 'New Clojure project', give it a name.
+# In the Package Explorer, drill into the new project and
+# select project.clj. Click 'Run > Run' and select as
+# Clojure Application. Eval (+ 1 1) in REPL.
 log "Installing Counterclockwise."
 mkdir -p editors/counterclockwise
 cd editors/counterclockwise
@@ -163,13 +170,12 @@ make_desktop_shortcut CounterClockwise \
                       $(pwd)/icon.xpm
 cd ~
 
-# TEST: lein new foo; Launch cursive and Import Project.
-# Should have "Leiningen project" as dialog text up top.
-# Navigate to Lein project directory, hit OK.
-# Import project from existing model, Leiningen.
-# Accept defaults on remaining dialogs; SDK should be filled in already.
-# After indexing, Run > Edit Configurations, click left-hand +,
-# choose Clojure REPL > Local, accept defaults.
+# TEST: lein new foo; Launch Cursive and select 'Import Project'.
+# Should have "Leiningen project" as dialog text at top. Navigate to
+# 'foo' project directory and hit OK. Accept defaults on all dialogs;
+# SDK should be filled in already. Wait for indexing to finish; click
+# Run > Edit Configurations, click left-hand +,
+# choose 'Clojure REPL > Local', accept defaults.
 # Click green Play triangle at upper-right-hand corner.
 # Should launch a REPL that can evaluate (+ 1 1)
 log "Installing Cursive."
