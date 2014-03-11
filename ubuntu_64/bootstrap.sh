@@ -146,7 +146,8 @@ chmod 755 ~/Desktop/emacs24.desktop
 cd ~
 
 log "Triggering package install for Emacs."
-emacs --kill
+# Nice to have. Don't let marmalade-repo.org instability abort build.
+emacs --script ~/.emacs.d/init.el || true
 
 # TEST: lein new foo; cd foo; lein repl;
 # vim foo/project.clj, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
