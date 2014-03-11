@@ -111,6 +111,16 @@ curl -O $LEIN_URL
 sudo mv lein /bin
 sudo chmod 755 /bin/lein
 
+log "Triggering lein self-install."
+lein --help
+
+log "Triggering up-front caching of Clojure and related jars."
+lein new foo
+cd foo
+lein deps
+cd ~
+rm -rf foo
+
 log "Cloning editor configs."
 git clone https://github.com/relevance/boomstick-editor-configs.git editor_configs
 cd editor_configs
@@ -126,7 +136,7 @@ mkdir ~/Desktop/
 # Test: lein new foo; emacs foo project.clj
 # M-x cider-jack-in
 # (+ 1 1)
-log "Installing emacs."
+log "Installing Emacs."
 sudo add-apt-repository -y ppa:cassou/emacs
 sudo apt-get update
 sudo apt-get -y install emacs24
@@ -134,6 +144,9 @@ ln -s ~/editor_configs/emacs ~/.emacs.d
 cp /usr/share/applications/emacs24.desktop ~/Desktop/
 chmod 755 ~/Desktop/emacs24.desktop
 cd ~
+
+log "Triggering package install for Emacs."
+emacs --kill
 
 # TEST: lein new foo; cd foo; lein repl;
 # vim foo/project.clj, :Connect, localhost:<REPL-PORT>, cqc, (+ 1 1)
